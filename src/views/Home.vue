@@ -1,68 +1,76 @@
 <template>
   <ion-page>
-    <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-title>Blank</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Blank</ion-title>
+          <ion-title size="large">Home</ion-title>
         </ion-toolbar>
       </ion-header>
     
-      <div id="container">
-        <strong>Ready to create an app?</strong>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      <div id="home">
+        <ion-button @click="playDifficult('easy')" color="success">Jouer Facile</ion-button>
+        <ion-button @click="playDifficult('medium')" color="warning">Jouer Moyen</ion-button>
+        <ion-button @click="playDifficult('hard')" color="danger">Jouer Difficile</ion-button>
       </div>
     </ion-content>
   </ion-page>
 </template>
 
 <script lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import { useRouter } from 'vue-router';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/vue';
 import { defineComponent } from 'vue';
+
+import store from '@/store/store'
 
 export default defineComponent({
   name: 'Home',
   components: {
+    IonPage,
     IonContent,
     IonHeader,
-    IonPage,
+    IonToolbar,
     IonTitle,
-    IonToolbar
+    IonButton
+  },
+  setup() {
+    const router = useRouter();
+    return { router };
+  },
+  methods:{
+    playDifficult(diff){
+      if(diff === 'easy'){
+        store.state.difficult = 12;
+      }else if(diff === "medium"){
+        store.state.difficult = 20;
+      }else if (diff === 'hard'){
+        store.state.difficult = 32;
+      }
+      store.state.clickToWin = 0;
+      store.state.isWin = false;
+      store.state.click = true;
+      this.router.push({name: "Game"});
+    }
   }
+
 });
 </script>
 
-<style scoped>
-#container {
+<style scoped lang="scss">
+#home {
   text-align: center;
-  
   position: absolute;
   left: 0;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .button{
+    width: 130px;
+  }
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-  
-  color: #8c8c8c;
-  
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
-}
 </style>
