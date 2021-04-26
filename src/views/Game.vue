@@ -17,13 +17,12 @@
   </ion-page>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
 import {useRouter} from "vue-router";
 import store from '@/store/store';
-import { IonContent, IonPage, IonBackButton, IonHeader, IonToolbar, IonButtons, IonTitle, alertController } from '@ionic/vue';
 import Board from "@/components/Board";
-
+import { IonContent, IonPage, IonBackButton, IonHeader, IonToolbar, IonButtons, IonTitle, alertController } from '@ionic/vue';
 export default defineComponent({
   name: "Game",
   components:{

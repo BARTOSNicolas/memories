@@ -4,7 +4,12 @@ import Home from '../views/Home.vue'
 import Game from "@/views/Game.vue";
 
 const routes: Array<RouteRecordRaw> = [
-  {
+    {
+      path: '/',
+      name: 'Start',
+      component: Home
+    },
+    {
     path: '/home',
     name: 'Home',
     component: Home

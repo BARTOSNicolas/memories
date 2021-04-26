@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "memories",
+  "appId": "com.memories.app",
+  "appName": "Memories",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "dist",
