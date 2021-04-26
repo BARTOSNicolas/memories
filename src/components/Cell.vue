@@ -1,5 +1,5 @@
 <template>
-  <div class="cell" v-on="click && !isWin ? { click: verifyPair } : {}" :class="[isRevert ? 'revert' : '', isWin ? 'win' : '', cardColor]" ref="card">
+  <div class="cell" v-on="click && !isWin ? { click: verifyPair } : {}" :class="[isRevert ? 'revert' : '', isWin ? 'win' : '']" ref="card">
     <div class="front"><img :src="cardImage" alt="memory card back"></div>
     <div class="back" ref="cardBack"><img :src="image" alt="memory card picture"></div>
   </div>
@@ -11,18 +11,23 @@ import store from '@/store/store'
 export default {
   name: "Cell",
   props:["id"],
+  data(){
+    return{
+      publicPath: process.env.BASE_URL
+    }
+  },
   computed:{
     card(){
       return store.state.card
     },
     cardImage(){
-      return "./assets/cards/"+store.state.card+".svg";
+      return this.publicPath+"assets/cards/"+store.state.card+".svg";
     },
     cell(){
       return store.state.cells[this.id];
     },
     image(){
-      return "./assets/animal-flat/"+ store.state.cells[this.id].id +".svg";
+      return this.publicPath+"assets/animal-flat/"+ store.state.cells[this.id].id +".svg";
     },
     clickToWin:{
       get(){

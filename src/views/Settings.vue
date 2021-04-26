@@ -12,11 +12,10 @@
       <div id="settings">
         <div class="select-card">
           <p>Choisi un dos de carte : </p>
-          <img src="assets/cards/card-1.svg" alt="" @click="setCardBG('card-1')" :class="card === 'card-1' ? 'active' : ''">
-          <img src="assets/cards/card-2.svg" alt="" @click="setCardBG('card-2')" :class="card === 'card-2' ? 'active' : ''">
-          <img src="assets/cards/card-3.svg" alt="" @click="setCardBG('card-3')" :class="card === 'card-3' ? 'active' : ''">
+          <img :src="`${publicPath}assets/cards/card-1.svg`" alt="" @click="setCardBG('card-1')" :class="card === 'card-1' ? 'active' : ''">
+          <img :src="`${publicPath}assets/cards/card-2.svg`" alt="" @click="setCardBG('card-2')" :class="card === 'card-2' ? 'active' : ''">
+          <img :src="`${publicPath}assets/cards/card-3.svg`" alt="" @click="setCardBG('card-3')" :class="card === 'card-3' ? 'active' : ''">
         </div>
-
       </div>
     </ion-content>
   </ion-page>
@@ -39,6 +38,11 @@ export default defineComponent({
     IonTitle,
     IonBackButton,
     IonButtons
+  },
+  data(){
+    return{
+      publicPath: process.env.BASE_URL
+    }
   },
   setup() {
     const router = useRouter();

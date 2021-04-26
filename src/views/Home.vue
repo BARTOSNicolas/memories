@@ -4,7 +4,7 @@
 
       <div id="home">
         <ion-avatar @click="router.push({name: 'Settings'})">
-          <img src="assets/icon/settings-sharp.svg" alt="memory card back">
+          <img :src="`${publicPath}assets/icon/settings-sharp.svg`" alt="memory card back">
         </ion-avatar>
         <ion-button @click="playDifficult('easy')" color="success">Jouer Facile</ion-button>
         <ion-button @click="playDifficult('medium')" color="warning">Jouer Moyen</ion-button>
@@ -29,6 +29,11 @@ export default defineComponent({
     IonButton,
     IonAvatar
 
+  },
+  data(){
+    return{
+      publicPath: process.env.BASE_URL
+    }
   },
   setup() {
     const router = useRouter();

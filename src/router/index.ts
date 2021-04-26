@@ -5,10 +5,10 @@ import Game from "@/views/Game.vue";
 import Settings from '@/views/Settings.vue'
 
 const routes: Array<RouteRecordRaw> = [
+
     {
         path: '/',
-        name: 'Start',
-        component: Home
+        redirect: {name: "Home"}
     },
     {
         path: '/home',
@@ -24,6 +24,10 @@ const routes: Array<RouteRecordRaw> = [
         path: '/game',
         name: 'Game',
         component: Game
+    },
+    {
+        path: "/:pathMatch(.*)*",
+        redirect: {name: "Home"}
     },
 ]
 
