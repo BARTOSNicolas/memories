@@ -108,7 +108,7 @@ export default{
     }
   }
 }
-@media screen and (orientation: portrait) and (min-width: 768px)  {
+@media screen and (orientation: portrait) and (min-width: 500px)  {
   #board {
     grid-gap: 15px;
     &.easy{

@@ -3,7 +3,7 @@
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start">
-          <ion-back-button defaultHref="/home"></ion-back-button>
+          <ion-back-button defaultHref="/"></ion-back-button>
         </ion-buttons>
         <ion-title>Play Game</ion-title>
       </ion-toolbar>

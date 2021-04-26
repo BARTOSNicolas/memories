@@ -161,9 +161,9 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    transform: rotateX(0deg)
   }
   .front{
-
     transform: rotateY(180deg);
     background-color: $my-secondary;
     img{

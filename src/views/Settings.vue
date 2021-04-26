@@ -72,6 +72,7 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #153138;
   .select-card{
     img{
       width: 64px;

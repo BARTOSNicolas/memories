@@ -8,10 +8,6 @@ const routes: Array<RouteRecordRaw> = [
 
     {
         path: '/',
-        redirect: {name: "Home"}
-    },
-    {
-        path: '/home',
         name: 'Home',
         component: Home
     },
@@ -25,15 +21,15 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Game',
         component: Game
     },
-    {
-        path: "/:pathMatch(.*)*",
-        redirect: {name: "Home"}
-    },
+    // {
+    //     path: "*",
+    //     component: Home
+    // },
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
+    history: createWebHistory(process.env.BASE_URL),
+    routes
 })
 
 export default router
