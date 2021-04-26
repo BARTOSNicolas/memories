@@ -1,15 +1,14 @@
 <template>
-  <ion-page>
+  <ion-page id="game-page">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="/home"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Play Game</ion-title>
+      </ion-toolbar>
+    </ion-header>
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-back-button defaultHref="/home"></ion-back-button>
-          </ion-buttons>
-          <ion-title>Game</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
       <div id="game">
         <board/>
       </div>
@@ -49,7 +48,10 @@ export default defineComponent({
   },
   watch:{
     isWin(){
-      this.winAlert()
+      setTimeout(()=>{
+        this.winAlert()
+      }, 1500)
+
     }
   },
   methods:{
@@ -59,7 +61,7 @@ export default defineComponent({
             cssClass: 'win-alert',
             header: "C'est Gagné",
             subHeader: 'Vous avez gagné.',
-            message: 'Vous avez réussi en '+this.clickToWin+' coups',
+            message: 'Vous avez réussi en '+Math.round(this.clickToWin/2)+' coups',
             buttons: ['OK'],
           });
       await alert.present();
@@ -72,12 +74,13 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@import '../theme/myVariable';
+
 #game{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100% - 60px);
-  padding-top: 10px;
+  height: 100%;
+  background: darken($my-secondary, 50%);
 }
-
 </style>

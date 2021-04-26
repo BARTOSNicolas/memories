@@ -1,8 +1,6 @@
 import { createApp } from 'vue'
 import router from "@/router";
 import store from "./store/store";
-import { createRouter, createWebHistory } from '@ionic/vue-router';
-import { RouteRecordRaw } from 'vue-router';
 import { IonicVue } from '@ionic/vue';
 
 /* Component */

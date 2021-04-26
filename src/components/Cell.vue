@@ -1,7 +1,7 @@
 <template>
-  <div class="cell" v-on="click && !isWin ? { click: verifyPair } : {}" :class="[isRevert ? 'revert' : '', isWin ? 'win' : '']">
-    <div class="front"></div>
-    <div class="back"><img :src="image" alt="memory card picture"></div>
+  <div class="cell" v-on="click && !isWin ? { click: verifyPair } : {}" :class="[isRevert ? 'revert' : '', isWin ? 'win' : '', cardColor]" ref="card">
+    <div class="front"><img :src="cardImage" alt="memory card back"></div>
+    <div class="back" ref="cardBack"><img :src="image" alt="memory card picture"></div>
   </div>
 </template>
 
@@ -12,6 +12,12 @@ export default {
   name: "Cell",
   props:["id"],
   computed:{
+    card(){
+      return store.state.card
+    },
+    cardImage(){
+      return "./assets/cards/"+store.state.card+".svg";
+    },
     cell(){
       return store.state.cells[this.id];
     },
@@ -61,7 +67,7 @@ export default {
   },
   methods:{
     verifyPair() {
-      if (!store.state.isWin) {
+      if (!store.state.isWin && !this.isRevert) {
         this.isRevert = true;
         this.clickToWin++;
         this.verify.push(this.cell);
@@ -81,7 +87,7 @@ export default {
                 }
               })
               this.verify = [];
-            }, 1000)
+            }, 500)
           } else {
             setTimeout(() => {
               console.log('Lose');
@@ -110,20 +116,33 @@ export default {
         }
       }
     },
+    checkCard(){
+      if(this.card === "card-1"){
+        this.$refs.card.style.border = "solid 2px #4FB5D2"
+      }else if(this.card === "card-2"){
+        this.$refs.card.style.border = "solid 2px #cd5257"
+        this.$refs.cardBack.style.backgroundColor = "#911d22"
+      }else if(this.card === "card-3"){
+        this.$refs.card.style.border = "solid 2px #eec687"
+        this.$refs.cardBack.style.backgroundColor = "#c58511"
+      }
+    }
   },
+  mounted(){
+    this.checkCard()
+  }
 }
 </script>
 
 <style scoped lang="scss">
+@import "../theme/myVariable";
 .cell{
   position: relative;
-  width: 60px;
-  height: 60px;
-  border: solid 2px #7974ff;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  width: 100%;
+  height: 100%;
+  border: solid 2px $my-secondary;
   border-radius: 8px;
-  background-color: darken(#7974ff, 70%);
+  background: linear-gradient(45deg, rgba(31,71,82,1) 0%, rgba(79,181,209,1) 50%, rgba(55,126,145,1) 100%);
   transition: 500ms;
   perspective: 1000px;
   transform: rotateY(180deg);
@@ -139,23 +158,35 @@ export default {
     align-items: center;
   }
   .front{
-    background-color: darken(#7974ff, 70%);
+
+    transform: rotateY(180deg);
+    background-color: $my-secondary;
+    img{
+      width: 100%;
+      border-radius: 4px;
+    }
   }
   .back{
     text-transform: uppercase;
-    background-color: #7974ff;
-    color: darken(#7974ff, 70%);
+    background-color: darken($my-secondary, 33%);
+    transition: 500ms;
     img{
       width: 100%;
     }
   }
   &.revert{
-    box-shadow: 0 0 15px #7974ff;
+    border: solid 2px $my-secondary;
     transform: rotateY(0deg);
   }
   &.win{
-    background-color: #7974ff;
+    border: solid 2px #FBF5B7!important;
+    box-shadow: 0 0 8px #FBF5B7;
+    .back{
+      background: linear-gradient(-45deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+    }
   }
+
 }
+
 
 </style>
